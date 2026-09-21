@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Activity Workspace · AW Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="core.js" defer></script>
+  <script src="api.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#dashboard">Skip to activity report</a>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">aw</span><span>Activity Workspace<span class="brand-sub">PERSONAL ANALYTICS</span></span></div>
+    <span class="local-badge"><span aria-hidden="true">●</span> Local ActivityWatch data</span>
+  </header>
+  <main class="workspace">
+    <section class="page-heading"><div><p class="eyebrow">WORK PATTERNS</p><h1>Your time, in perspective.</h1><p class="subtitle">Understand active time, focused work, and time away.</p></div><p id="timezone" class="timezone"></p></section>
+    <form id="filters" class="filter-panel" novalidate aria-label="Activity filters">
+      <fieldset id="filterFields">
+        <legend class="sr-only">Date, hours, and device</legend>
+        <div class="filter-row">
+          <label class="field range-field">Date range<select id="rangePicker" name="preset"><option value="today">Today</option><option value="yesterday">Yesterday</option><option value="week">Last 7 days</option><option value="month">Last 30 days</option><option value="exact">Exact date</option><option value="custom">Custom range</option></select></label>
+          <label id="fromField" class="field" hidden><span id="fromLabel">Date</span><input id="fromDate" type="date"></label>
+          <label id="toField" class="field" hidden>To date<input id="toDate" type="date"></label>
+          <label class="field">Daily hours<select id="hoursPicker"><option value="full">Full day</option><option value="work">9 AM – 6 PM</option><option value="custom">Custom hours</option></select></label>
+          <label id="startField" class="field time-field" hidden>From time<input id="startTime" type="time" value="09:00"></label>
+          <label id="endField" class="field time-field" hidden>To time<input id="endTime" type="time" value="18:00"></label>
+          <label id="deviceField" class="field device-field" hidden>Device / sources<select id="devicePicker"><option value="">Choose a device</option></select></label>
+          <button id="refreshBtn" class="primary" type="submit"><span aria-hidden="true">↻</span> Refresh</button>
+        </div>
+      </fieldset>
+      <div class="filter-footer"><span>Hours apply to every selected day and every chart.</span><span id="refreshHint" role="status" aria-live="polite"></span></div>
+      <p id="filterError" class="error-text" role="alert" hidden></p>
+    </form>
+    <div id="statusText" class="status" role="status" aria-live="polite">Connecting to ActivityWatch…</div>
+    <section class="report-heading"><h2>Activity overview</h2><p id="appliedRange">No range loaded</p></section>
+    <div id="dashboard"><div class="empty-state"><div class="empty-icon" aria-hidden="true">◷</div><h2>Preparing your activity report</h2><p>Your data stays on this device.</p></div></div>
+    <footer class="footer"><span id="lastRefresh">Not yet refreshed</span><span>AFK estimates inactivity, not work quality. Reading and meetings may involve little input.</span></footer>
+    <noscript><p class="status error">Enable JavaScript to load ActivityWatch charts.</p></noscript>
+  </main>
+</body>
+</html>
