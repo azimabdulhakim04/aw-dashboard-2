@@ -146,6 +146,14 @@ function timeline(model) {
 function insight(title, value, note) {
   const card = el('article', 'insight'); card.append(el('p', 'insight-label', title), el('p', 'insight-value', value), el('p', 'insight-note', note)); return card;
 }
+function appCategory(app) { return C.productivity.get(app) || 'neutral'; }
+function appLegend() {
+  const node = el('div', 'legend');
+  for (const category of ['productive', 'neutral', 'unproductive']) {
+    const item = el('span', 'legend-item'); item.append(el('i', `swatch ${category}`), el('span', '', C.labels[category])); node.append(item);
+  }
+  return node;
+}
 function hourly(model) {
   const node = panel('Hourly distribution', 'Totals by local clock hour across selected days'); node.append(legend(false));
   const scroller = el('div', 'hour-scroll'); scroller.tabIndex = 0; scroller.setAttribute('aria-label', 'Hourly distribution chart');
@@ -171,13 +179,17 @@ function hourly(model) {
 function apps(model) {
   const grid = el('div', 'grid-two');
   const list = panel('Application breakdown', model.limited ? 'Recorded window time · not AFK filtered' : 'Confirmed active time only');
+  list.append(appLegend());
   const rows = [...model.apps].sort((a, b) => b[1] - a[1]);
   const total = rows.reduce((n, [, s]) => n + s, 0);
   if (!rows.length) list.append(el('p', 'empty-inline', 'No application activity for this selection.'));
   rows.slice(0, 12).forEach(([app, seconds]) => {
     const row = el('div', 'bar-row'), heading = el('div', 'bar-heading');
-    heading.append(el('span', 'bar-name', app), el('span', 'bar-value', `${duration(seconds)} · ${Math.round(seconds / total * 100)}%`));
-    const track = el('div', 'bar-track'), fill = el('div', 'bar-fill'); fill.style.width = `${seconds / rows[0][1] * 100}%`; track.append(fill); row.append(heading, track); list.append(row);
+    const category = appCategory(app), name = el('span', 'bar-name');
+    name.append(el('i', `swatch ${category}`), el('span', '', app));
+    name.title = `${app} · ${C.labels[category]}`;
+    heading.append(name, el('span', 'bar-value', `${duration(seconds)} · ${Math.round(seconds / total * 100)}%`));
+    const track = el('div', 'bar-track'), fill = el('div', `bar-fill ${category}`); fill.style.width = `${seconds / rows[0][1] * 100}%`; fill.setAttribute('aria-label', `${app}: ${C.labels[category]}`); track.append(fill); row.append(heading, track); list.append(row);
   });
   if (rows.length > 12) { const details = el('details'); details.append(el('summary', '', `All ${rows.length} applications`), table(['Application', 'Duration'], rows.map(([a, s]) => [a, duration(s)]))); list.append(details); }
   const split = panel('Active-time composition', 'Productive share is a classification, not a performance rating');

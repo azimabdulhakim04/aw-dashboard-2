@@ -40,6 +40,8 @@ Focus sessions are contiguous productive/active blocks of at least five minutes;
 - Hover, keyboard focus, and tap expose interval details. A paged semantic table provides a nonvisual equivalent.
 - Hourly stacked bars split intervals at real local clock-hour boundaries and retain elapsed time across 23/25-hour DST days.
 - Applications, titles, focus blocks, composition, switch rate, best productive hour, and longest focus/AFK insights all derive from the same reconciled model.
+- Application bars and swatches use the app's classification color (Productive, Neutral, or Unproductive), so the contribution of each app is visible without reading the totals alone.
+- Classification is intentionally policy-based: editor and terminal names are productive for an engineering team, `loginwindow` is neutral, and browsers remain neutral until an explicit title/domain policy is agreed. App names come from ActivityWatch's `data.app` field; currently the map is the auditable hardcoded policy, not an unsupported guess about intent.
 - External app names and titles are aggregated with `Map` and inserted with text nodes. Canvas failure leaves the textual composition breakdown and all other sections intact.
 - The compact slicer supports exact and inclusive ranges, Last 7/30 days, full day, 9 AM–6 PM, and custom same-day hours. Pending choices are separate from the applied report.
 - Local CSS supplies a corporate slate/indigo theme, accessible focus states, internal scrolling for wide charts/tables, and desktop/tablet/mobile breakpoints.

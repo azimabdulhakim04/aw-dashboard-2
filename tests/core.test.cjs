@@ -21,6 +21,17 @@ test('known 9–18 fixture: state totals, hourly splits, focus, transitions, lon
   assert.equal(m.hourly[9].productive, 3600); assert.equal(m.hourly[10].productive, 3600); assert.equal(m.bestHour.hour, 9);
   reconcile(m);
 });
+test('common app spellings retain their category for the application chart', () => {
+  assert.equal(C.productivity.get('Chatgpt'), 'productive');
+  assert.equal(C.productivity.get('ChatGPT'), 'productive');
+  assert.equal(C.productivity.get('Visual Studio Code'), 'productive');
+  assert.equal(C.productivity.get('Code - Insiders'), 'productive');
+  assert.equal(C.productivity.get('VSCodium'), 'productive');
+  assert.equal(C.productivity.get('Cursor'), 'productive');
+  assert.equal(C.productivity.get('Warp'), 'productive');
+  assert.equal(C.productivity.get('Spotify'), 'unproductive');
+  assert.equal(C.productivity.get('Google Chrome'), 'neutral');
+});
 test('conflicting AFK is unknown, duplicate records do not double count', () => {
   const window = w(9,0,18,0), active = a(9,0,18,0);
   const m = C.analyze([window, window], [active, active, a(10,0,11,0,'afk')], range());
