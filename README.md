@@ -42,7 +42,9 @@ AFK means keyboard/mouse inactivity, not lack of useful work. “Productive” i
 
 ## Customize classifications
 
-Edit the `productivity` map near the top of `core.js`. Unlisted applications default to Neutral when AFK confirms the user is active.
+Edit the `productivity` map near the top of `core.js`. The Applications tab uses the same classification colors as the timeline: indigo for Productive, amber for Neutral, and red for Unproductive. Common engineering editors and terminals—including Code, Visual Studio Code, Code Insiders, VSCodium, Cursor, Terminal, iTerm2, Warp, Alacritty, and kitty—are Productive by default. Unlisted applications default to Neutral when AFK confirms the user is active.
+
+`loginwindow` is a macOS session/login process, not an engineering application, so it remains Neutral. Browser applications such as Chrome and Safari are Neutral by default because a browser can be used for coding, documentation, meetings, operations, or personal browsing. The current dashboard does not infer intent from page titles; use explicit title/domain rules only if your team wants that policy.
 
 ## Test
 

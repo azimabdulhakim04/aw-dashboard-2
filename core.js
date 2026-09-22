@@ -6,9 +6,11 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
   const productivity = new Map(Object.entries({
-    Antigravity: 'productive', Claude: 'productive', Chatgpt: 'productive',
-    Codex: 'productive', Code: 'productive', Terminal: 'productive',
-    iTerm2: 'productive', Xcode: 'productive', Figma: 'productive',
+    Antigravity: 'productive', Claude: 'productive', Chatgpt: 'productive', ChatGPT: 'productive',
+    Codex: 'productive', Code: 'productive', 'Visual Studio Code': 'productive', 'Code - Insiders': 'productive',
+    VSCodium: 'productive', Cursor: 'productive', Terminal: 'productive',
+    iTerm2: 'productive', Warp: 'productive', Alacritty: 'productive', kitty: 'productive',
+    Xcode: 'productive', Figma: 'productive',
     Notion: 'productive', Linear: 'productive', Slack: 'productive',
     'Google Chrome': 'neutral', Safari: 'neutral', Finder: 'neutral',
     'System Settings': 'neutral', Mail: 'neutral', Spotify: 'unproductive',
